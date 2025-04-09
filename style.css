@@ -1,0 +1,23 @@
+h1 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: larger;
+}
+h2 {
+  text-align: center;
+}
+
+/* #freelancers > li {
+  border: solid, 1px, black;
+} */
+
+table,
+td,
+th {
+  border: solid, 1px, black;
+  border-collapse: collapse;
+  padding: 10px;
+}
