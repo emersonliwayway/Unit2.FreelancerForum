@@ -32,7 +32,7 @@ const freelancers = [
   { name: "Carol", occupation: "Programmer", price: 70 },
 ];
 
-const tableHeader = ["Name", "Occupation", "Starting Price"];
+const maxFreelancers = 10;
 
 // generate random freelancer and add to freelancers array
 function newPerson() {
@@ -40,45 +40,67 @@ function newPerson() {
   const occupation =
     occupations[Math.floor(Math.random() * occupations.length)];
   // returns random integer between 20 and 80
-  const price = Math.floor(Math.random() * 81) + 1;
+  const price = Math.floor(Math.random() * (80 - 20 + 1));
 
   //   add to freelancers array
   freelancers.push({ name, occupation, price });
+
+  if (freelancers.length >= maxFreelancers) {
+    clearInterval(addInterval);
+  }
 }
 
 // ==Render==
+// function render() {
+//   const table = document.querySelector("#table");
+//   const elements = freelancers.map((freelancer) => {
+//     const element = document.createElement("tr");
+//     for (const key in freelancer) {
+//       const cell = document.createElement("td");
+//       cell.textContent = `${freelancer[key]}`;
+//       element.appendChild(cell);
+//     }
+//     return element;
+//   });
+//   table.replaceChildren(...elements);
+// }
+
+//==Render==
 function render() {
-  const table = document.querySelector("#table");
-  const elements = freelancers.map((freelancer) => {
-    const element = document.createElement("tr");
-    for (const key in freelancer) {
-      const cell = document.createElement("td");
-      cell.textContent = `${freelancer[key]}`;
-      element.appendChild(cell);
-    }
-    // element.textContent = `${freelancer.name} ${freelancer.occupation} $${freelancer.price}`;
-    return element;
+  const page = document.querySelector("#list");
+  const list = freelancers.map((person) => {
+    const freeList = document.createElement("ul");
+    const line = document.createElement("li");
+    const line2 = document.createElement("li");
+    const line3 = document.createElement("li");
+    line.textContent = `Name: ${person.name}`;
+    line2.textContent = `Occupation: ${person.occupation}`;
+    line3.textContent = `Starting Price: $${person.price}`;
+    freeList.append(line, line2, line3);
+    return freeList;
   });
-  table.replaceChildren(...elements);
+  page.replaceChildren(...list);
+  averagePrice();
 }
 
 // average price
 // when a new freelancer is added this function is called and number is updated
-function averagePrice() {}
+function averagePrice() {
+  const total = freelancers.reduce((sum, person) => {
+    sum += person.price;
+    return sum;
+  }, 0);
+  const average = total / freelancers.length;
+  const averageFixed = average.toFixed(2);
+  const showPrice = document.querySelector("#price");
+  showPrice.textContent = `The average starting price is: $${averageFixed}`;
+}
 
 // ==Script==
 const addInterval = setInterval(() => {
   newPerson();
-  averagePrice();
   render();
-}, 4000);
+}, 3000);
 
 // for initial array
 render();
-averagePrice();
-
-// generate new freelancer randomly including price
-
-// render array on page function
-
-// calculate and update average price function

@@ -10,14 +10,14 @@ h2 {
   text-align: center;
 }
 
-/* #freelancers > li {
-  border: solid, 1px, black;
-} */
-
-table,
+/* table,
 td,
 th {
-  border: solid, 1px, black;
-  border-collapse: collapse;
   padding: 10px;
+} */
+
+ul {
+  padding: 10px;
+  list-style: none;
+  margin: 10px;
 }
